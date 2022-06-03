@@ -106,7 +106,7 @@
         }
 
         .btn2 {
-            margin-top: 9%;
+            margin-top: 4%;
             font-size: xx-large;
             border-radius: 12px;
             transition-duration: 0.3s;
@@ -118,11 +118,31 @@
         }
 
         .btn2:hover {
-
             background-color: #1E90FF;
             color: white;
+        }
 
+        .collapsible {
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
 
+        .active, .collapsible:hover {
+            background-color: #555;
+        }
+
+        .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #f1f1f1;
         }
 
 
@@ -162,18 +182,17 @@
 
         </tr>
         <tr th:each="ticket : ${applicationTickets}">
-            <td><span class="tdTables" th:text="${ticket.id}" name="zigi"></span></td>
-            <td><span class="tdTables" th:text="${ticket.email}"></span></td>
-            <td><span class="tdTables" th:text="${ticket.title}"></span></td>
-            <td><span class="tdTables" th:text="${ticket.description}"></span></td>
-            <td><span class="tdTables" th:text="${ticket.status}"></span></td>
+            <td style="width:80px"><span th:text="${ticket.id}"></span></td>
+            <td style="width:180px"><span th:text="${ticket.email}"></span></td>
+            <td style="width:180px"><span th:text="${ticket.title}"></span></td>
+            <td style="width:180px"><span th:text="${ticket.description}"></span></td>
+            <td style="width:180px"><span th:text="${ticket.status}"></span></td>
 
 
             <form action="#" th:action="@{/changeStatus}" method="post">
 
                 <td><select class="form-control" id="status" name="status">
                     <option disabled selected value> Select an option</option>
-
                     <option th:value="'In progress'"> In progress</option>
                     <option th:value="'Finished'">Finished</option>
                     <option th:value="'Stopped'">Stopped</option>
@@ -213,10 +232,11 @@
 
         </tr>
         <tr th:each="ticket : ${systemTickets}">
-            <td><span th:text="${ticket.id}"></span></td>
-            <td><span th:text="${ticket.email}"></span></td>
-            <td><span th:text="${ticket.title}"></span></td>
-            <td><span th:text="${ticket.status}"></span></td>
+            <td style="width:80px"><span th:text="${ticket.id}"></span></td>
+            <td style="width:180px"><span th:text="${ticket.email}"></span></td>
+            <td style="width:180px"><span th:text="${ticket.title}"></span></td>
+            <td style="width:180px"><span th:text="${ticket.description}"></span></td>
+            <td style="width:180px"><span th:text="${ticket.status}"></span></td>
 
             <form action="#" th:action="@{/changeStatus}" method="post">
 
@@ -262,12 +282,11 @@
 
         </tr>
         <tr th:each="ticket : ${hardwareTickets}">
-            <td><span th:text="${ticket.id}"></span></td>
-            <td><span th:text="${ticket.email}"></span></td>
-            <td><span th:text="${ticket.title}"></span></td>
-            <td><span th:text="${ticket.description}"></span></td>
-            <td><span th:text="${ticket.status}"></span></td>
-
+            <td style="width:80px"><span th:text="${ticket.id}"></span></td>
+            <td style="width:180px"><span th:text="${ticket.email}"></span></td>
+            <td style="width:180px"><span th:text="${ticket.title}"></span></td>
+            <td style="width:180px"><span th:text="${ticket.description}"></span></td>
+            <td style="width:180px"><span th:text="${ticket.status}"></span></td>
             <form action="#" th:action="@{/changeStatus}" method="post">
 
                 <td><select class="form-control" id="status" name="status">
@@ -312,11 +331,11 @@
 
         </tr>
         <tr th:each="ticket : ${Other}">
-            <td><span th:text="${ticket.id}"></span></td>
-            <td><span th:text="${ticket.email}"></span></td>
-            <td><span th:text="${ticket.title}"></span></td>
-            <td><span th:text="${ticket.description}"></span></td>
-            <td><span th:text="${ticket.status}"></span></td>
+            <td style="width:80px"><span th:text="${ticket.id}"></span></td>
+            <td style="width:180px"><span th:text="${ticket.email}"></span></td>
+            <td style="width:180px"><span th:text="${ticket.title}"></span></td>
+            <td style="width:180px"><span th:text="${ticket.description}"></span></td>
+            <td style="width:180px"><span th:text="${ticket.status}"></span></td>
             <form action="#" th:action="@{/changeStatus}" method="post">
 
                 <td><select class="form-control" id="status" name="status">
@@ -351,13 +370,13 @@
 <div id="delete">
 
     <form action="#" th:action="@{/statistics}" method="post">
-
-
         <div id="add">
             <button type="submit" class="btn2" id="sendTicketButton"> Statistics</button>
         </div>
-
     </form>
+        <form action="#" th:action="@{/}">
+            <button type="submit" class="btn2"> Add ticket</button>
+        </form>
 </div>
 
 <div id="stópka">© 2020 Copyright:</div>

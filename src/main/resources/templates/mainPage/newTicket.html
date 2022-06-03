@@ -22,7 +22,7 @@
         }
 
         .btn1 {
-
+            height: 70px;
             font-size: xx-large;
             border-radius: 12px;
             transition-duration: 0.3s;
@@ -95,8 +95,6 @@
 
         #delete {
             margin-left: 20%;
-
-
             width: 60%
 
         }
@@ -104,7 +102,7 @@
 
         .btn1 {
 
-            font-size: medium;
+            font-size: xx-large;
             border-radius: 12px;
             transition-duration: 0.3s;
             width: 100%;
@@ -124,13 +122,13 @@
 
         .btn2 {
             margin-top: 9%;
-            font-size: xx-large;
             border-radius: 12px;
             transition-duration: 0.3s;
-            width: 100%;
             border: 2px solid #1E90FF;
             background-color: white;
             color: #1E90FF;
+            width: 45%;
+            margin-left: 28%;
 
         }
 
@@ -207,32 +205,11 @@
         </div>
     </form>
 </div>
-<div id="mainForm">
-    <h1 id="mainHeader" class="text-primary" style="margin-top: 20%; margin-bottom:10%">Your tickets</h1>
-    <table style="margin-left: -30%">
-        <tr>
-            <td><b>ID</b></td>
-            <td><b>Email</b></td>
-            <td><b>Title</b></td>
-            <td><b>Description</b></td>
-            <td><b>Status</b></td>
 
-        </tr>
-        <tr th:each="ticket : ${filtredTickets}">
-            <td><span class="tdTables" th:text="${ticket.ticket_id}" name="zigi"></span></td>
-            <td><span class="tdTables" th:text="${ticket.email}"></span></td>
-            <td><span class="tdTables" th:text="${ticket.title}"></span></td>
-            <td><span class="tdTables" th:text="${ticket.description}"></span></td>
-            <td><span class="tdTables" th:text="${ticket.status}"></span></td>
-
-            </form>
-        </tr>
-        <tr th:if="${filtredTickets.empty}">
-            <td><span>No tickets available</span></td>
-        </tr>
-    </table>
-</div>
 <div id="mainForm">
+    <form action="#" th:action="@{/tickets}">
+        <button type="submit" class="btn2">Received tickets</button>
+    </form>
 </div>
 <div id="stópka">© 2020 Copyright:</div>
 <p>Cieszyn Dream Works</p>

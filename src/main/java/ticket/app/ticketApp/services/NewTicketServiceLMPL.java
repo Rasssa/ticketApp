@@ -28,9 +28,6 @@ public class NewTicketServiceLMPL implements NewTicketService{
 
     @Override
     public void updateStatus(Long ticket_id, String status) {
-        /*JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        jdbcTemplate.update(
-                "UPDATE ticket SET status =\'"+status+"\' WHERE ticket_id=" + ticket_id);*/
     }
 }
 
