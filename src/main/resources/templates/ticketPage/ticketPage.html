@@ -1,0 +1,370 @@
+<!doctype html>
+<!--suppress ALL -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <style>
+
+        div {
+            font-family: 'Roboto Slab', serif;
+        }
+
+        button {
+
+            margin-right: 50px
+        }
+
+        span {
+            margin-right: 120px;
+        }
+
+        b {
+            margin-right: 120px;
+        }
+
+        .subtitles {
+            margin-top: 10%;
+            text-align: center;
+            font-size: big;
+        }
+
+        #mainHeader {
+            text-align: center;
+            margin-top: 3%;
+
+        }
+
+
+        #mainForm {
+
+            margin-left: 5%;
+            width: 90%;
+
+
+        }
+
+        #form-group {
+
+            color: red;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 3%;
+
+            width: 90%;
+
+            text-align: center;
+
+
+        }
+
+        #delete {
+            margin-left: 20%;
+
+
+            width: 60%
+
+        }
+
+
+        .btn1 {
+
+            font-size: medium;
+            border-radius: 12px;
+            transition-duration: 0.3s;
+            width: 100%;
+            border: 2px solid #1E90FF;
+            background-color: white;
+            color: #1E90FF;
+
+        }
+
+        .btn1:hover {
+
+            background-color: #1E90FF;
+            color: white;
+
+
+        }
+
+        p {
+
+            font-weight: bold;
+            text-align: center;
+            margin-left: 25%;
+            width: 50%;
+            font-size: medium;
+
+
+        }
+
+        #stópka {
+            font-size: medium;
+            text-align: center;
+            margin-left: 25%;
+            width: 50%;
+            margin-top: 3%
+        }
+
+        .btn2 {
+            margin-top: 9%;
+            font-size: xx-large;
+            border-radius: 12px;
+            transition-duration: 0.3s;
+            width: 100%;
+            border: 2px solid #1E90FF;
+            background-color: white;
+            color: #1E90FF;
+
+        }
+
+        .btn2:hover {
+
+            background-color: #1E90FF;
+            color: white;
+
+
+        }
+
+
+    </style>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Custom CSS-->
+    <link rel="stylesheet" href="stylesTicketPage.css?v=1.0">
+
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+
+
+    <title>Ticket generator</title>
+</head>
+
+<body>
+<div>
+    <h1 id="mainHeader" class="text-primary">Tickets</h1>
+</div>
+<div id="mainForm">
+    <h4 class="subtitles">Problem with application</h4>
+    <table>
+        <tr>
+            <td><b>ID</b></td>
+            <td><b>Email</b></td>
+            <td><b>Title</b></td>
+            <td><b>Description</b></td>
+            <td><b>Status</b></td>
+            <td><b></b></td>
+
+
+        </tr>
+        <tr th:each="ticket : ${applicationTickets}">
+            <td><span class="tdTables" th:text="${ticket.id}" name="zigi"></span></td>
+            <td><span class="tdTables" th:text="${ticket.email}"></span></td>
+            <td><span class="tdTables" th:text="${ticket.title}"></span></td>
+            <td><span class="tdTables" th:text="${ticket.description}"></span></td>
+            <td><span class="tdTables" th:text="${ticket.status}"></span></td>
+
+
+            <form action="#" th:action="@{/changeStatus}" method="post">
+
+                <td><select class="form-control" id="status" name="status">
+                    <option disabled selected value> Select an option</option>
+
+                    <option th:value="'In progress'"> In progress</option>
+                    <option th:value="'Finished'">Finished</option>
+                    <option th:value="'Stopped'">Stopped</option>
+                    <option th:value="'Canceled'">Canceled</option>
+                </select></td>
+
+                <input hidden type="text" name="TicketName" th:value="${ticket.id}" )>
+                <td>
+                    <button type="submit" class="btn1" name="TicketName">Save changes</button>
+                </td>
+
+            </form>
+
+            <form action="#" th:action="@{/delete}" method="post">
+
+                <input hidden type="text" name="TicketName" th:value="${ticket.id}" )>
+                <td>
+                    <button type="submit" class="btn1" name="TicketName">Resolve</button>
+                </td>
+
+            </form>
+        </tr>
+        <tr th:if="${applicationTickets.empty}">
+            <td><span>No tickets available</span></td>
+        </tr>
+    </table>
+
+    <h4 class="subtitles">Problem with system</h4>
+    <table>
+        <tr>
+            <td><b>ID</b></td>
+            <td><b>Email</b></td>
+            <td><b>Title</b></td>
+            <td><b>Description</b></td>
+            <td><b>Status</b></td>
+            <td><b></b></td>
+
+        </tr>
+        <tr th:each="ticket : ${systemTickets}">
+            <td><span th:text="${ticket.id}"></span></td>
+            <td><span th:text="${ticket.email}"></span></td>
+            <td><span th:text="${ticket.title}"></span></td>
+            <td><span th:text="${ticket.status}"></span></td>
+
+            <form action="#" th:action="@{/changeStatus}" method="post">
+
+                <td><select class="form-control" id="status" name="status">
+                    <option disabled selected value> Select an option</option>
+
+                    <option th:value="'In progress'"> In progress</option>
+                    <option th:value="'Finished'">Finished</option>
+                    <option th:value="'Stopped'">Stopped</option>
+                    <option th:value="'Canceled'">Canceled</option>
+                </select></td>
+
+
+
+                <input hidden type="text" name="TicketName" th:value="${ticket.id}" )>
+                <td>
+                    <button type="submit" class="btn1" name="TicketName">Save changes</button>
+                </td>
+
+            <form action="#" th:action="@{/delete}" method="post">
+
+                <input hidden type="text" name="TicketName" th:value="${ticket.id}" )>
+                <td>
+                    <button type="submit" class="btn1" name="TicketName">Resolve</button>
+                </td>
+
+            </form>
+        </tr>
+        <tr th:if="${systemTickets.empty}">
+            <td><span>No tickets available</span></td>
+        </tr>
+    </table>
+
+    <h4 class="subtitles">Problem with hardware</h4>
+    <table>
+        <tr>
+            <td><b>ID</b></td>
+            <td><b>Email</b></td>
+            <td><b>Title</b></td>
+            <td><b>Description</b></td>
+            <td><b>Status</b></td>
+            <td><b></b></td>
+
+        </tr>
+        <tr th:each="ticket : ${hardwareTickets}">
+            <td><span th:text="${ticket.id}"></span></td>
+            <td><span th:text="${ticket.email}"></span></td>
+            <td><span th:text="${ticket.title}"></span></td>
+            <td><span th:text="${ticket.description}"></span></td>
+            <td><span th:text="${ticket.status}"></span></td>
+
+            <form action="#" th:action="@{/changeStatus}" method="post">
+
+                <td><select class="form-control" id="status" name="status">
+                    <option disabled selected value> Select an option</option>
+
+                    <option th:value="'In progress'"> In progress</option>
+                    <option th:value="'Finished'">Finished</option>
+                    <option th:value="'Stopped'">Stopped</option>
+                    <option th:value="'Canceled'">Canceled</option>
+                </select></td>
+
+                <input hidden type="text" name="TicketName" th:value="${ticket.id}" )>
+                <td>
+                    <button type="submit" class="btn1" name="TicketName">Save changes</button>
+                </td>
+
+            </form>
+
+            <form action="#" th:action="@{/delete}" method="post">
+
+                <input hidden type="text" name="TicketName" th:value="${ticket.id}" )>
+                <td>
+                    <button type="submit" class="btn1" name="TicketName">Resolve</button>
+                </td>
+
+            </form>
+
+        </tr>
+        <tr th:if="${hardwareTickets.empty}">
+            <td><span>No tickets available</span></td>
+        </tr>
+    </table>
+    <h4 class="subtitles">Other problem</h4>
+    <table>
+        <tr>
+            <td><b>ID</b></td>
+            <td><b>Email</b></td>
+            <td><b>Title</b></td>
+            <td><b>Description</b></td>
+            <td><b>Status</b></td>
+            <td><b></b></td>
+
+        </tr>
+        <tr th:each="ticket : ${Other}">
+            <td><span th:text="${ticket.id}"></span></td>
+            <td><span th:text="${ticket.email}"></span></td>
+            <td><span th:text="${ticket.title}"></span></td>
+            <td><span th:text="${ticket.description}"></span></td>
+            <td><span th:text="${ticket.status}"></span></td>
+            <form action="#" th:action="@{/changeStatus}" method="post">
+
+                <td><select class="form-control" id="status" name="status">
+                    <option disabled selected value> Select an option</option>
+                    <option th:value="'In progress'"> In progress</option>
+                    <option th:value="'Finished'">Finished</option>
+                    <option th:value="'Stopped'">Stopped</option>
+                    <option th:value="'Canceled'">Canceled</option>
+                </select></td>
+
+                <input hidden type="text" name="TicketName" th:value="${ticket.id}" )>
+                <td>
+                    <button type="submit" class="btn1" name="TicketName">Save changes</button>
+                </td>
+
+            </form>
+
+            <form action="#" th:action="@{/delete}" method="post">
+
+                <input hidden type="text" name="TicketName" th:value="${ticket.id}" )>
+                <td>
+                    <button type="submit" class="btn1" name="TicketName">Resolve</button>
+                </td>
+
+            </form>
+        </tr>
+        <tr th:if="${Other.empty}">
+            <td><span>No tickets available</span></td>
+        </tr>
+    </table>
+</div>
+<div id="delete">
+
+    <form action="#" th:action="@{/statistics}" method="post">
+
+
+        <div id="add">
+            <button type="submit" class="btn2" id="sendTicketButton"> Statistics</button>
+        </div>
+
+    </form>
+</div>
+
+<div id="stópka">© 2020 Copyright:</div>
+<p>Cieszyn Dream Works</p>
+
+</body>
+
+<script src="script.js"></script>
+
+</html>
